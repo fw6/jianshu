@@ -25,9 +25,10 @@ export const Nav = styled.div`
 `
 export const NavItem = styled.div`
   padding: 0 15px;
-  line-height: 56px;
+  line-height: 58px;
   font-size: 17px;
   color: #333;
+  cursor: pointer;
   &.left {
     float: left;
   }
@@ -38,12 +39,17 @@ export const NavItem = styled.div`
   &.active {
     color: #ea6f5a;
   }
+  &.download {
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
 `
 
 export const SearchWrapper = styled.div`
   position: relative;
   float: left;
-  .iconfont {
+  .search {
     position: absolute;
     right: 5px;
     bottom: 5px;
@@ -82,17 +88,76 @@ export const NavSearch = styled.input.attrs({
   }
 
   &.slide-enter {
-    transition: all 0.3s linear;
+    transition: all 0.3s ease-in;
   }
   &.slide-enter-active {
     width: 240px;
   }
 
   &.slide-exit {
-    transition: all 0.3s linear;
+    transition: all 0.3s ease-out;
   }
   &.slide-exit-active {
     width: 160px;
+  }
+`
+export const SearchRecommend = styled.div`
+  position: absolute;
+  top: 56px;
+  left: 0;
+  width: 240px;
+  padding: 0 20px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  background: #fff;
+`
+export const SearchRecommendTitle = styled.p`
+  margin-top: 20px;
+  margin-bottom: 15px;
+  line-height: 20px;
+  font-size: 14px;
+  color: #969696;
+`
+export const SearchRecommendSwitch = styled.span`
+  position: relative;
+  float: right;
+  font-size: 13px;
+  cursor: pointer;
+  &:hover {
+    color: #2f2f2f;
+  }
+  .spin {
+    float: left;
+    margin-right: 6px;
+    font-size: 12px;
+    transition: all 0.3s ease-in;
+    transform: rotate(0deg);
+  }
+  &::before {
+    position: absolute;
+    content: '';
+    top: -10px;
+    right: -20px;
+    bottom: -10px;
+    left: -20px;
+  }
+`
+export const SearchRecommendItem = styled.a.attrs({
+  href: '/'
+})`
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  line-height: 20px;
+  padding: 0 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  color: #787878;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    border-color: #b4b4b4;
+    color: #333;
   }
 `
 export const Addition = styled.div`
@@ -110,8 +175,14 @@ export const Button = styled.div`
   border-radius: 19px;
   border: 1px solid #ec6149;
   font-size: 14px;
+  cursor: pointer;
   &.reg {
     color: #ec6149;
+    &:hover {
+      color: #ec6149;
+      border-color: #ec6149;
+      background-color: rgba(236, 97, 73, 0.05);
+    }
   }
   &.writting {
     color: #fff;
