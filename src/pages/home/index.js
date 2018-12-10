@@ -1,19 +1,25 @@
 import React from 'react'
-import * as home from './style'
-import Topic from './components/Topic'
+import { connect } from 'react-redux'
+
 import Recommend from './components/Recommend'
 import Writter from './components/Writter'
 import List from './components/List'
 import Banner from './components/Banner'
 
+import { actionCreators } from './store'
+import * as home from './style'
+
 class Home extends React.Component {
+  componentDidMount() {
+    this.props.changeHomeData()
+  }
+
   render() {
     return (
       <home.HomeWrapper>
         <home.HomeLeft>
-          {/* <home.BannerWrapper /> */}
           <Banner />
-          <Topic />
+          {/* <Topic /> */}
           <List />
         </home.HomeLeft>
         <home.HomeRight>
@@ -25,4 +31,13 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+const mapDispatch = dispatch => ({
+  changeHomeData() {
+    dispatch(actionCreators.getHomeInfo())
+  }
+})
+
+export default connect(
+  null,
+  mapDispatch
+)(Home)
