@@ -1,25 +1,46 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import * as Com from './style'
 import { actions } from './store'
+import { actions as loginActions } from '../../pages/login/store'
 import { connect } from 'react-redux'
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
+  loginOrLogoff(isLogin, logoff) {
+    if (isLogin) {
+      return (
+        <Com.NavItem className="right" onClick={logoff}>
+          退出
+        </Com.NavItem>
+      )
+    } else {
+      return (
+        <Link to="login">
+          <Com.NavItem className="right">登录</Com.NavItem>
+        </Link>
+      )
+    }
+  }
+
   render() {
     const {
       focused,
       recommends,
       handleSearchFocused,
-      handleSearchBlur
+      handleSearchBlur,
+      isLogin,
+      logoff
     } = this.props
     return (
       <Com.HeaderWrapper>
-        <Com.Logo />
+        <Link to="/">
+          <Com.Logo />
+        </Link>
         <Com.Nav>
           <Com.NavItem className="left active">首页</Com.NavItem>
           <Com.NavItem className="left download">下载APP</Com.NavItem>
-
-          <Com.NavItem className="right">登录</Com.NavItem>
+          {this.loginOrLogoff(isLogin, logoff)}
           <Com.NavItem className="right">
             <i className="iconfont">&#xe636;</i>
           </Com.NavItem>
@@ -70,9 +91,9 @@ class Header extends React.Component {
     if (newList.length) {
       for (let i = (page - 1) * 10; i < page * 10 && i < newList.length; i++) {
         recommendItems.push(
-          <Com.SearchRecommendItem key={newList[i]}>
-            {newList[i]}
-          </Com.SearchRecommendItem>
+          <Link to="/" key={newList[i]}>
+            <Com.SearchRecommendItem>{newList[i]}</Com.SearchRecommendItem>
+          </Link>
         )
       }
     }
@@ -110,12 +131,12 @@ class Header extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    // focused: state.get('header').get('focused')
     focused: state.getIn(['header', 'focused']),
     mouseIn: state.getIn(['header', 'mouseIn']),
     recommends: state.getIn(['header', 'recommends']),
     page: state.getIn(['header', 'page']),
-    totalPage: state.getIn(['header', 'totalPage'])
+    totalPage: state.getIn(['header', 'totalPage']),
+    isLogin: state.getIn(['login', 'isLogin'])
   }
 }
 
@@ -145,6 +166,9 @@ const mapDispatchToProps = dispatch => {
       } else {
         dispatch(actions.changePage(1))
       }
+    },
+    logoff() {
+      dispatch(loginActions.logoff())
     }
   }
 }

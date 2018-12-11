@@ -2,7 +2,7 @@ import React from 'react'
 // import uuid from 'uuid'
 import { BannerWrapper } from '../style'
 
-class Banner extends React.Component {
+class Banner extends React.PureComponent {
   // state = {
   //   items: [
   //     {

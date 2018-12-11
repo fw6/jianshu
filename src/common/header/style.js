@@ -5,9 +5,7 @@ export const HeaderWrapper = styled.div`
   height: 58px;
   border-bottom: 1px solid #f0f0f0;
 `
-export const Logo = styled.a.attrs({
-  href: '/'
-})`
+export const Logo = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -141,9 +139,7 @@ export const SearchRecommendSwitch = styled.span`
     left: -20px;
   }
 `
-export const SearchRecommendItem = styled.a.attrs({
-  href: '/'
-})`
+export const SearchRecommendItem = styled.div`
   float: left;
   margin-right: 10px;
   margin-bottom: 15px;

@@ -34,3 +34,13 @@ export const getMoreList = page => {
     })
   }
 }
+
+export const toggleTopShow = isShow => {
+  return dispatch => {
+    const action = {
+      type: types.CHANGE_SCROLL_SHOW,
+      isShow
+    }
+    dispatch(action)
+  }
+}

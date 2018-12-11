@@ -9,9 +9,22 @@ import Banner from './components/Banner'
 import { actionCreators } from './store'
 import * as home from './style'
 
-class Home extends React.Component {
+class Home extends React.PureComponent {
   componentDidMount() {
     this.props.changeHomeData()
+    this.bindEvents()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.props.changeScrollTopShow)
+  }
+
+  handelScrollTop() {
+    window.scrollTo(0, 0)
+  }
+
+  bindEvents() {
+    window.addEventListener('scroll', this.props.changeScrollTopShow)
   }
 
   render() {
@@ -26,18 +39,34 @@ class Home extends React.Component {
           <Recommend />
           <Writter />
         </home.HomeRight>
+        {this.props.isToTop ? (
+          <home.BackTop onClick={() => this.handelScrollTop()}>
+            返回顶部
+          </home.BackTop>
+        ) : null}
       </home.HomeWrapper>
     )
   }
 }
 
+const mapState = state => ({
+  isToTop: state.getIn(['home', 'showScroll'])
+})
+
 const mapDispatch = dispatch => ({
   changeHomeData() {
     dispatch(actionCreators.getHomeInfo())
+  },
+  changeScrollTopShow() {
+    if (document.documentElement.scrollTop > 100) {
+      dispatch(actionCreators.toggleTopShow(true))
+    } else {
+      dispatch(actionCreators.toggleTopShow(false))
+    }
   }
 })
 
 export default connect(
-  null,
+  mapState,
   mapDispatch
 )(Home)
