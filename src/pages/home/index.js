@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import Recommend from './components/Recommend'
 import Writter from './components/Writter'
@@ -69,4 +70,4 @@ const mapDispatch = dispatch => ({
 export default connect(
   mapState,
   mapDispatch
-)(Home)
+)(withRouter(Home))

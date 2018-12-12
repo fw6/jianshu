@@ -64,10 +64,12 @@ class Header extends React.PureComponent {
           </Com.SearchWrapper>
         </Com.Nav>
         <Com.Addition>
-          <Com.Button className="writting">
-            <i className="iconfont">&#xe75a;</i>
-            写文章
-          </Com.Button>
+          <Link to="/write">
+            <Com.Button className="writting">
+              <i className="iconfont">&#xe75a;</i>
+              写文章
+            </Com.Button>
+          </Link>
           <Com.Button className="reg">注册</Com.Button>
         </Com.Addition>
       </Com.HeaderWrapper>
